@@ -13,6 +13,8 @@ contains(CONFIG,hybris) {
     SUBDIRS += hybrisrotationadaptor
     SUBDIRS += hybrisgeorotationadaptor
     SUBDIRS += hybrisstepcounteradaptor
+    SUBDIRS += hybrispickupadaptor
+    SUBDIRS += hybrispickupadaptor
 
 } else {
 
@@ -55,5 +57,3 @@ SUBDIRS += mpu6050accelerometer
 }
 
 }
-
-
