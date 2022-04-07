@@ -1,3 +1,15 @@
+sensorfw-qt5 (0.12.6) unstable; urgency=medium
+
+  * [sensorfw] Add support for sensor binder API 2
+
+ -- Matti Lehtimäki <matti.lehtimaki@jolla.com>  Wed, 24 Nov 2021 18:37:00 +0300
+
+sensorfw-qt5 (0.12.5) unstable; urgency=medium
+
+  * [sensorfw] Fix build on 32-bit kernels with 64-bit time_t
+
+ -- Matti Lehtimäki <matti.lehtimaki@jolla.com>  Wed, 13 Oct 2021 19:51:00 +0300
+
 sensorfw-qt5 (0.12.4) unstable; urgency=medium
 
   * [sensorfw] Remove /usr/include/filters from pkgconfig file as it is not installed
