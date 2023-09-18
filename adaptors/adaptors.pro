@@ -1,21 +1,22 @@
 TEMPLATE = subdirs
 
 include( ../common-config.pri )
+
+HYBRIS_SUBDIRS = hybrisaccelerometer \
+                 hybrisalsadaptor \
+                 hybrisgyroscopeadaptor \
+                 hybrismagnetometeradaptor \
+                 hybrispressureadaptor \
+                 hybrisproximityadaptor \
+                 hybrisorientationadaptor \
+                 hybrisrotationadaptor \
+                 hybrisgeorotationadaptor \
+                 hybrisstepcounteradaptor \
+                 hybrispickupadaptor
+
 # split like this as Sailfish only installs hybris plugins
 contains(CONFIG,hybris) {
-    SUBDIRS = hybrisaccelerometer
-    SUBDIRS += hybrisalsadaptor
-    SUBDIRS += hybrisgyroscopeadaptor
-    SUBDIRS += hybrismagnetometeradaptor
-    SUBDIRS += hybrispressureadaptor
-    SUBDIRS += hybrisproximityadaptor
-    SUBDIRS += hybrisorientationadaptor
-    SUBDIRS += hybrisrotationadaptor
-    SUBDIRS += hybrisgeorotationadaptor
-    SUBDIRS += hybrisstepcounteradaptor
-    SUBDIRS += hybrispickupadaptor
-    SUBDIRS += hybrispickupadaptor
-
+    SUBDIRS += $$HYBRIS_SUBDIRS
 } else {
 
 SUBDIRS = alsadaptor \
@@ -40,6 +41,10 @@ SUBDIRS += iioadaptor
 SUBDIRS += humidityadaptor
 SUBDIRS += pressureadaptor
 SUBDIRS += temperatureadaptor
+
+config_hybris {
+    SUBDIRS += $$HYBRIS_SUBDIRS
+}
 
 contains(CONFIG,legacy) {
 
