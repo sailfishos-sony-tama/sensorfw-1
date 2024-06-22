@@ -1379,7 +1379,7 @@ int HybrisManager::queueEvents(const sensors_event_t *buffer, int numEvents)
             sensordLogW()<< QString("incorrect event version (version=%1, expected=%2").arg(data.version).arg(sizeof(sensors_event_t));
             errorInInput = true;
         }
-        if (data.type == SENSOR_TYPE_PROXIMITY) {
+        if (data.type == SENSOR_TYPE_PROXIMITY || data.type == SENSOR_TYPE_PICK_UP_GESTURE) {
             ++wakeupEventCount;
         }
 #endif
@@ -1418,7 +1418,7 @@ int HybrisManager::processEvents(const sensors_event_t *buffer, int numEvents)
             ++wakeupEventCount;
         }
 #else
-        if (data.type == SENSOR_TYPE_PROXIMITY) {
+        if (data.type == SENSOR_TYPE_PROXIMITY || data.type == SENSOR_TYPE_PICK_UP_GESTURE) {
             ++wakeupEventCount;
         }
 #endif
@@ -1439,24 +1439,6 @@ int HybrisManager::processEvents(const sensors_event_t *buffer, int numEvents)
             fallback->type = fallback->sensor = 0;
         }
 
-#ifdef USE_BINDER
-        Q_UNUSED(errorInInput);
-#else
-        if (data.version != sizeof(sensors_event_t)) {
-            sensordLogW()<< QString("incorrect event version (version=%1, expected=%2").arg(data.version).arg(sizeof(sensors_event_t));
-            errorInInput = true;
-        }
-#endif
-
-#ifdef USE_BINDER
-        int index = indexForHandle(data.sensor);
-        const struct sensor_t *sensor = &m_sensorArray[index];
-        if (sensor->flags & SENSOR_FLAG_WAKE_UP) {
-#else
-        if (data.type == SENSOR_TYPE_PROXIMITY || data.type == SENSOR_TYPE_PICK_UP_GESTURE) {
-#endif
-            blockSuspend++;
-        }
         processSample(data);
     }
     return wakeupEventCount;
